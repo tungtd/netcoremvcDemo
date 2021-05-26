@@ -1,0 +1,88 @@
+﻿@model Ciber_WebUI.Models.ViewModels.OrderCreateViewModel
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Create New Order</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="OrderName"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="OrderName" class="form-control" />
+                        <span asp-validation-for="OrderName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="ProductId"></label>
+                    </div>
+                    <div class="col-4">
+                        <select asp-for="ProductId" asp-items="@Model.ProductDropDown" class="form-control">
+                            <option selected>--Select Product--</option>
+                        </select>
+                        <span asp-validation-for="ProductId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CustomerId"></label>
+                    </div>
+                    <div class="col-4">
+                        <select asp-for="CustomerId" asp-items="@Model.CustomerDropDown" class="form-control">
+                            <option selected>--Select Customer--</option>
+                        </select>
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="OrderDate"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="OrderDate" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                        <span asp-validation-for="OrderDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Amount"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-75" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-danger w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ('@ViewBag.isSuccess' == 'False') {
+            alert("Amount of the order should not is greater than the quantity of the product");
+        }
+    });
+</script>
